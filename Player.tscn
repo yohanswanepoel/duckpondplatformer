@@ -31,19 +31,19 @@ region = Rect2( 416, 0, 32, 32 )
 atlas = ExtResource( 1 )
 region = Rect2( 448, 0, 32, 32 )
 
-[sub_resource type="AtlasTexture" id=12]
+[sub_resource type="AtlasTexture" id=8]
 atlas = ExtResource( 1 )
 region = Rect2( 480, 0, 32, 32 )
 
-[sub_resource type="AtlasTexture" id=10]
+[sub_resource type="AtlasTexture" id=9]
 atlas = ExtResource( 1 )
 region = Rect2( 448, 0, 32, 32 )
 
-[sub_resource type="AtlasTexture" id=11]
+[sub_resource type="AtlasTexture" id=10]
 atlas = ExtResource( 1 )
 region = Rect2( 416, 0, 32, 32 )
 
-[sub_resource type="SpriteFrames" id=8]
+[sub_resource type="SpriteFrames" id=11]
 animations = [ {
 "frames": [ SubResource( 1 ) ],
 "loop": false,
@@ -65,13 +65,13 @@ animations = [ {
 "name": "run",
 "speed": 12.0
 }, {
-"frames": [ SubResource( 12 ), SubResource( 10 ), SubResource( 11 ) ],
+"frames": [ SubResource( 8 ), SubResource( 9 ), SubResource( 10 ) ],
 "loop": false,
 "name": "attack",
 "speed": 12.0
 } ]
 
-[sub_resource type="RectangleShape2D" id=9]
+[sub_resource type="RectangleShape2D" id=12]
 extents = Vector2( 7.65782, 10.5029 )
 
 [node name="Player" type="KinematicBody2D"]
@@ -83,12 +83,21 @@ __meta__ = {
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 position = Vector2( -0.103703, -5.18496 )
-frames = SubResource( 8 )
+frames = SubResource( 11 )
 animation = "attack"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource( 9 )
+shape = SubResource( 12 )
 
 [node name="Position2D" type="Position2D" parent="."]
 position = Vector2( 7.77941, 3.40949 )
+
+[node name="Camera2D" type="Camera2D" parent="."]
+current = true
+limit_left = -10
+limit_top = -170
+limit_right = 1750
+limit_bottom = 175
+smoothing_enabled = true
+editor_draw_limits = true
 [connection signal="animation_finished" from="AnimatedSprite" to="." method="_on_AnimatedSprite_animation_finished"]
