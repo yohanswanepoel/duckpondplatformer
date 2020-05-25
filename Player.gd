@@ -4,6 +4,7 @@ extends KinematicBody2D
 const GRAVITY = 10  # Positive as it is down in Godot
 const JUMP_POWER = -250  # Negative because it is up in Godot
 const FLOOR = Vector2(0, -1)
+const LOWER = 600
 
 var SPEED = 60
 var velocity = Vector2()
@@ -41,17 +42,19 @@ func _physics_process(delta):
 					if direction > 0:
 						direction = -1
 						scale.x *= -1
+		elif Input.is_action_pressed("ui_cancel"):
+			pause()
 		else:
 			velocity.x = 0
 			if on_ground and is_attacking == false:
 				$AnimatedSprite.play("idle")
 		
 		# Up and Down
-		if Input.is_action_pressed("ui_up") and on_ground and is_attacking == false:
+		if Input.is_action_pressed("ui_select") and on_ground and is_attacking == false:
 			velocity.y = JUMP_POWER
 		
 		# Just pressed stops holding in rapid fire
-		if Input.is_action_just_pressed("ui_select") && is_attacking == false:
+		if Input.is_action_just_pressed("ui_shoot") && is_attacking == false:
 			if is_on_floor():
 				velocity.x = 0
 			is_attacking = true
@@ -86,6 +89,10 @@ func _physics_process(delta):
 			for i in range(get_slide_count()):
 				if "enemy" in get_slide_collision(i).collider.name:
 					dead()
+					
+		print(position.y)
+		if position.y > LOWER:
+			dead()
 	else:
 		pass
 
@@ -97,6 +104,8 @@ func dead():
 	$CollisionShape2D.call_deferred("set_disabled", true)
 	$Timer.start()
 	
+func pause():
+	get_tree().change_scene("res://MainMenu.tscn")
 
 func _on_AnimatedSprite_animation_finished():
 	is_attacking = false

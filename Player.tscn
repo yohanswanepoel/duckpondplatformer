@@ -103,7 +103,7 @@ __meta__ = {
 }
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
-position = Vector2( -0.103703, -5.18496 )
+position = Vector2( 0.896297, -5.18496 )
 frames = SubResource( 11 )
 animation = "dead"
 
