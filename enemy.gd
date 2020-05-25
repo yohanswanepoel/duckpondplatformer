@@ -38,6 +38,11 @@ func _physics_process(delta):
 		if $RayCast2D.is_colliding() == false:
 			direction *= -1
 			scale.x *= -1
+			
+		if get_slide_count() > 0:  #After move and slide counts all the collisions that occur
+			for i in range(get_slide_count()):
+				if "Player" in get_slide_collision(i).collider.name:
+					get_slide_collision(i).collider.dead()
 	
 	
 func _on_Timer_timeout():
