@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://sprites/sheet_9.png" type="Texture" id=1]
+[ext_resource path="res://ChangeChange.gd" type="Script" id=2]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 7.65947, 8.19817 )
+
+[node name="ChangeChange" type="Area2D"]
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 224, 0, 16, 16 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0.186333, 1.67704 )
+shape = SubResource( 1 )
+[connection signal="body_entered" from="." to="." method="_on_ChangeChange_body_entered"]
