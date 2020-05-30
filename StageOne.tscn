@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://ground tileset.tres" type="TileSet" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://sprites/backgrounds/layered/layer_01_1920 x 1080.png" type="Texture" id=5]
 [ext_resource path="res://sprites/backgrounds/layered/layer_03_1920 x 1080.png" type="Texture" id=6]
 [ext_resource path="res://sprites/backgrounds/layered/layer_05_1920 x 1080.png" type="Texture" id=7]
+[ext_resource path="res://ScreenShake.gd" type="Script" id=8]
 
 [node name="StageOne" type="Node2D"]
 
@@ -22,24 +23,42 @@ tile_data = PoolIntArray( -655361, 12, 0, -589825, 12, 0, -524289, 12, 0, -45875
 
 [node name="enemy" parent="." instance=ExtResource( 3 )]
 position = Vector2( 69.9449, 40.2821 )
+enemy_type = 1
+enemy_size = 1
+hp = 2
 
 [node name="enemy2" parent="." instance=ExtResource( 3 )]
 position = Vector2( 229.849, 136.885 )
+enemy_type = 2
 
 [node name="enemy3" parent="." instance=ExtResource( 3 )]
 position = Vector2( 139.547, 135.985 )
+enemy_type = 1
+hp = 3
 
 [node name="enemy4" parent="." instance=ExtResource( 3 )]
 position = Vector2( 398.183, 137.123 )
+enemy_type = 2
 
 [node name="enemy5" parent="." instance=ExtResource( 3 )]
 position = Vector2( 668.43, 120.959 )
+enemy_type = 2
+hp = 2
 
 [node name="enemy6" parent="." instance=ExtResource( 3 )]
 position = Vector2( 750.392, 8.94388 )
+enemy_type = 1
 
 [node name="enemy7" parent="." instance=ExtResource( 3 )]
 position = Vector2( 938.449, 120.276 )
+enemy_type = 2
+enemy_size = 1
+hp = 5
+
+[node name="enemy8" parent="." instance=ExtResource( 3 )]
+position = Vector2( 1563.21, 117.085 )
+enemy_size = 2
+hp = 3
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 scroll_base_scale = Vector2( 0.2, 0.2 )
@@ -106,3 +125,9 @@ motion_mirroring = Vector2( 500, 0 )
 position = Vector2( 243.299, 83.7737 )
 scale = Vector2( 0.26322, 0.174073 )
 texture = ExtResource( 7 )
+
+[node name="ScreenShake" type="Node2D" parent="."]
+script = ExtResource( 8 )
+
+[node name="Tween" type="Tween" parent="ScreenShake"]
+[connection signal="tween_completed" from="ScreenShake/Tween" to="ScreenShake" method="_on_Tween_tween_completed"]

@@ -90,7 +90,6 @@ func _physics_process(delta):
 				if "enemy" in get_slide_collision(i).collider.name:
 					dead()
 					
-		print(position.y)
 		if position.y > LOWER:
 			dead()
 	else:
