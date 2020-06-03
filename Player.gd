@@ -10,6 +10,8 @@ var SPEED = 60
 var velocity = Vector2()
 var on_ground = false
 var direction = 1
+var fire_ball_power = 1
+var fire_ball_count = 0
 
 var is_attacking = false
 var is_dead = false
@@ -61,10 +63,13 @@ func _physics_process(delta):
 			$AnimatedSprite.play("attack")
 			var fireball = FIREBALL.instance()
 			fireball.direction = direction
+			fireball.damage = fire_ball_power
 			
 			fireball.position = $Position2D.global_position
 			get_parent().add_child(fireball)
-			
+			fire_ball_count -= 1
+			if fire_ball_count == 0:
+				fire_ball_power = 1
 		# Gravity every frame default is 60fps
 		velocity.y += GRAVITY
 		
@@ -95,6 +100,13 @@ func _physics_process(delta):
 	else:
 		pass
 
+func power_up(type):
+	if type=="blue":
+		fire_ball_power = 2
+		fire_ball_count = 20
+	else:
+		fire_ball_power = 1
+	
 func dead():
 	is_dead = true
 	rotate(1.570796)

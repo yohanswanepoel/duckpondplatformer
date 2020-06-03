@@ -42,7 +42,7 @@ func _ready():
 	scale = size
 
 
-func dead(damage):
+func inflict(damage):
 	hp -= damage
 	if hp <= 0:
 		is_dead = true

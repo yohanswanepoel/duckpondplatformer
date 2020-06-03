@@ -12,7 +12,10 @@ func _ready():
 func _physics_process(delta):
 	velocity.x = SPEED * delta * direction  # Move and slide multiplies delta, translate does not
 	translate(velocity)
-	$AnimatedSprite.play("shoot")
+	if damage == 1:
+		$AnimatedSprite.play("shoot")
+	elif damage == 2:
+		$AnimatedSprite.play("shoot_blue")
 	
 	if direction < 0:
 		$AnimatedSprite.flip_h = true
@@ -24,10 +27,13 @@ func _on_VisibilityNotifier2D_screen_exited():
 
 func _on_fireball_body_entered(body):
 	if "enemy" in body.name:  # Does the string enemy exists in the body name
-		body.dead(damage)  # run the enemy dead function
+		body.inflict(damage)  # run the enemy dead function
 		
 	if body.name != "Player":
-		$AnimatedSprite.play("explode")
+		if damage == 1:
+			$AnimatedSprite.play("explode")
+		elif damage == 2:
+			$AnimatedSprite.play("explode_blue")
 		queue_free()
 	
 	

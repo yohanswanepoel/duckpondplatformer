@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://ground tileset.tres" type="TileSet" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://sprites/backgrounds/layered/layer_05_1920 x 1080.png" type="Texture" id=7]
 [ext_resource path="res://ScreenShake.gd" type="Script" id=8]
 [ext_resource path="res://ChangeChange.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Blue_fire_powerup.tscn" type="PackedScene" id=10]
 
 [node name="StageOne" type="Node2D"]
 
@@ -134,4 +135,10 @@ script = ExtResource( 8 )
 [node name="ChangeChange" parent="." instance=ExtResource( 9 )]
 position = Vector2( 1732.57, 102.355 )
 target_stage = "res://StageTwo.tscn"
+
+[node name="BlueFirePowerup" parent="." instance=ExtResource( 10 )]
+position = Vector2( 32.6583, 41.3278 )
+
+[node name="BlueFirePowerup2" parent="." instance=ExtResource( 10 )]
+position = Vector2( 1251.08, 24.4485 )
 [connection signal="tween_completed" from="ScreenShake/Tween" to="ScreenShake" method="_on_Tween_tween_completed"]
