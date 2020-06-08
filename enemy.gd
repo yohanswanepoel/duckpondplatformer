@@ -74,7 +74,7 @@ func _physics_process(delta):
 		if get_slide_count() > 0:  #After move and slide counts all the collisions that occur
 			for i in range(get_slide_count()):
 				if "Player" in get_slide_collision(i).collider.name:
-					get_slide_collision(i).collider.dead()
+					get_slide_collision(i).collider.damage(50)
 	
 	
 func _on_Timer_timeout():

@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://ground tileset.tres" type="TileSet" id=2]
@@ -10,6 +10,10 @@
 [ext_resource path="res://ScreenShake.gd" type="Script" id=8]
 [ext_resource path="res://ChangeChange.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Blue_fire_powerup.tscn" type="PackedScene" id=10]
+[ext_resource path="res://lifebar.gd" type="Script" id=11]
+[ext_resource path="res://sprites/ui/under.png" type="Texture" id=12]
+[ext_resource path="res://sprites/ui/over.png" type="Texture" id=13]
+[ext_resource path="res://sprites/ui/progress.png" type="Texture" id=14]
 
 [node name="StageOne" type="Node2D"]
 
@@ -141,4 +145,35 @@ position = Vector2( 32.6583, 41.3278 )
 
 [node name="BlueFirePowerup2" parent="." instance=ExtResource( 10 )]
 position = Vector2( 1251.08, 24.4485 )
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+margin_right = 104.0
+margin_bottom = 32.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
+margin_bottom = 32.0
+
+[node name="label_score" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+margin_bottom = 14.0
+
+[node name="label_health" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+margin_top = 18.0
+margin_bottom = 32.0
+
+[node name="lifebar" type="TextureProgress" parent="MarginContainer/HBoxContainer"]
+margin_left = 4.0
+margin_right = 104.0
+margin_bottom = 32.0
+texture_under = ExtResource( 12 )
+texture_over = ExtResource( 13 )
+texture_progress = ExtResource( 14 )
+tint_under = Color( 1, 1, 1, 0.392157 )
+script = ExtResource( 11 )
 [connection signal="tween_completed" from="ScreenShake/Tween" to="ScreenShake" method="_on_Tween_tween_completed"]

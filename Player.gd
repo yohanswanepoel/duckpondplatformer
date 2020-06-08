@@ -12,6 +12,7 @@ var on_ground = false
 var direction = 1
 var fire_ball_power = 1
 var fire_ball_count = 0
+var health = 100
 
 var is_attacking = false
 var is_dead = false
@@ -93,10 +94,10 @@ func _physics_process(delta):
 		if get_slide_count() > 0:  #After move and slide counts all the collisions that occur
 			for i in range(get_slide_count()):
 				if "enemy" in get_slide_collision(i).collider.name:
-					dead()
+					damage(50)
 					
 		if position.y > LOWER:
-			dead()
+			damage(1000)
 	else:
 		pass
 
@@ -107,13 +108,15 @@ func power_up(type):
 	else:
 		fire_ball_power = 1
 	
-func dead():
-	is_dead = true
-	rotate(1.570796)
-	velocity.x = 0
-	$AnimatedSprite.play("dead")
-	$CollisionShape2D.call_deferred("set_disabled", true)
-	$Timer.start()
+func damage(damage_done):
+	health -= damage_done
+	if health <= 0:
+		is_dead = true
+		rotate(1.570796)
+		velocity.x = 0
+		$AnimatedSprite.play("dead")
+		$CollisionShape2D.call_deferred("set_disabled", true)
+		$Timer.start()
 	
 func pause():
 	get_tree().change_scene("res://MainMenu.tscn")
